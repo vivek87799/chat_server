@@ -1,22 +1,86 @@
-{
-  "chatid": "AAAD",
-  "message": "node1"
-}{
-  "chatid": "AAAC",
-  "message": "node2"
-}{
-  "chatid": "AAAC",
-  "message": "node2 test "
-}{
-  "chatid": "AAAD",
-  "message": "node1 test "
-}{
-  "chatid": "AAAD",
-  "message": "node1 test message"
-}{
-  "chatid": "AAAC",
-  "message": "node2 test message"
-}{
-  "chatid": "AAAB",
-  "message": "node aaab"
-}
+[
+  {
+    "messageid": 1,
+    "message": {
+      "chatid": "AAAC",
+      "message": "I am also new here"
+    }
+  },
+  {
+    "messageid": 1,
+    "message": {
+      "chatid": "AAAC",
+      "message": "I am also new here"
+    }
+  },
+  {
+    "messageid": 2,
+    "message": {
+      "chatid": "AAAC",
+      "message": "hello"
+    }
+  },
+  {
+    "messageid": 4,
+    "message": {
+      "chatid": "AAAC",
+      "message": "hello world"
+    }
+  },
+  {
+    "messageid": 4,
+    "message": {
+      "chatid": "AAAC",
+      "message": "hello world"
+    }
+  },
+  {
+    "messageid": 5,
+    "message": {
+      "chatid": "AAAC",
+      "message": "test"
+    }
+  },
+  {
+    "messageid": 7,
+    "message": {
+      "chatid": "AAAM",
+      "message": "hai"
+    }
+  },
+  {
+    "messageid": 7,
+    "message": {
+      "chatid": "AAAM",
+      "message": "hai"
+    }
+  },
+  {
+    "messageid": 8,
+    "message": {
+      "chatid": "AAAJ",
+      "message": "hello world"
+    }
+  },
+  {
+    "messageid": 11,
+    "message": {
+      "chatid": "AAAE",
+      "message": "hello guys"
+    }
+  },
+  {
+    "messageid": 11,
+    "message": {
+      "chatid": "AAAE",
+      "message": "hello guys"
+    }
+  },
+  {
+    "messageid": 11,
+    "message": {
+      "chatid": "AAAE",
+      "message": "hello guys"
+    }
+  }
+]

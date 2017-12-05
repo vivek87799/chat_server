@@ -3,18 +3,17 @@
     <head>
         <title>web chat</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
-        <!-- <link href="/styles.css" rel="stylesheet" /> -->
+        <link href="/styles.css" rel="stylesheet" /> 
         
     </head>
     <body>
         <h1>
-            chitti
+            Chat Room
         </h1>
-        <div id='chatbox'>
+        <div id='chatbox' class="chat-window">
             <div id='chatarea'>
-
             </div>
-            <input id="chatid" type="text"/>
+            <input id="chatid" type="text" disabled placeholder="chat id"/>
             <input id="messagearea" type="text"/>
             <button id="sendmessage">Send</button>
         </div>
