@@ -4,33 +4,37 @@ var message = document.getElementById('messagearea');
 var chatarea = document.getElementById('chatarea');
 var chatid = document.getElementById('chatid')
 var btn = document.getElementById('sendmessage');
+var cid;
 
-console.log('test socket id on init')
-socket.emit('getchatid');
-console.log(socket.id);
-document.getElementById("chatid").value = socket.id;
-
+// To get unique id for the chat
+window.onload = function(){
+    socket.emit('getchatid');    
+};
+window.onfocus = function(){
+    cid = socket.id.slice(-4);
+    document.getElementById("chatid").value = cid;    
+}
 
 // Listener to listen when a message is being sent
 // It forwards or emits the message to the server
 btn.addEventListener('click',function(){
-    document.getElementById("chatid").value = socket.id;    
     socket.emit('cmessage',{
         message: message.value,
-        chatid: socket.id
+        chatid: socket.id.slice(-4)
 
     });
 });
 
-//listens to the port for new message
+//listens to the port to get the generated socket id
 socket.on('getchatid',function(id){
     console.log(id);
-    document.getElementById("chatid").value = id;
+    cid = id.slice(-4);
+    document.getElementById("chatid").value = cid;
 })
 
 //listens to the port for new message
 socket.on('cmessage',function(data){
     console.log(data);
-    console.log(socket.id);
+    console.log(socket.id)
     chatarea.innerHTML += '<p>' + data.chatid + ':' + data.message + '<p>'; 
 })
