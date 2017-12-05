@@ -1,0 +1,22 @@
+{
+  "chatid": "AAAD",
+  "message": "node1"
+}{
+  "chatid": "AAAC",
+  "message": "node2"
+}{
+  "chatid": "AAAC",
+  "message": "node2 test "
+}{
+  "chatid": "AAAD",
+  "message": "node1 test "
+}{
+  "chatid": "AAAD",
+  "message": "node1 test message"
+}{
+  "chatid": "AAAC",
+  "message": "node2 test message"
+}{
+  "chatid": "AAAB",
+  "message": "node aaab"
+}

@@ -19,8 +19,8 @@ window.onfocus = function(){
 // It forwards or emits the message to the server
 btn.addEventListener('click',function(){
     socket.emit('cmessage',{
-        message: message.value,
-        chatid: socket.id.slice(-4)
+        chatid: socket.id.slice(-4),        
+        message: message.value
 
     });
 });
