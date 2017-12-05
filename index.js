@@ -25,6 +25,7 @@ io.on('connection',function(socket){
     })
     socket.on('getchatid',function(id){
         console.log(id)
+        console.log('in server')        
         console.log(socket.id)
         io.sockets.emit('getchatid',socket.id)
     })
