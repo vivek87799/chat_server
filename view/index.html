@@ -2,18 +2,17 @@
 <html>
     <head>
         <title>web chat</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
         <link href="/styles.css" rel="stylesheet" /> 
         
     </head>
     <body>
-        <h1>
-            Chat Room
-        </h1>
         <div id='chatbox' class="chat-window">
+            <h1>Chat Room</h1>
             <div id='chatarea'>
             </div>
-            <input id="chatid" type="text" disabled placeholder="chat id"/>
+            <div> <input id="chatid" type="text" placeholder="chat id" floatplaceholder="never"/></div>
             <input id="messagearea" type="text"/>
             <button id="sendmessage">Send</button>
         </div>

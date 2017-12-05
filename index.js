@@ -11,7 +11,7 @@ var messageid = 0;
 // Reading the chat history from txt file in sync so that it waits for the chat history to get loaded first
 chathistory = JSON.parse(fs.readFileSync('db/chathistory.json'));
 // A call back function to listen and get the message
-var server = app.listen(9001,function(){
+var server = app.listen(9001,function(err,data){
     console.log('listening at 9001');
 });
 
@@ -28,9 +28,12 @@ io.on('connection',function(socket){
         }catch(err){
             messageid = 0;
         }
+        newmessage = {};
         newmessage["messageid"] = messageid;
         newmessage["message"] = data;
+        console.log(chathistory.length);
         chathistory.push(newmessage);
+        console.log(chathistory.length);
         fs.writeFile('db/chathistory.json',JSON.stringify(chathistory, null, 2),finished);
 
         function finished(){

@@ -2,9 +2,10 @@ body{
     font-family: 'Nunito';
 }
 
-h2{
-    font-size: 18px;
+h1{
+    font-size: 24px;
     padding: 10px 20px;
+    align-content: center;
     color: #575ed8;
 }
 
@@ -59,7 +60,7 @@ input{
 }
 
 button{
-    background: #44c74a;
+    background: #6d6fdf;
     color: #fff;
     font-size: 18px;
     border: 0;
