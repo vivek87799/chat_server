@@ -61,7 +61,7 @@ socket.on('cmessage',function(data){
     console.log(data);
     console.log(socket.id);
     messagearea.value = "";
-    chatarea.innerHTML += '<p>' + data.chatid + ':' + data.message + '<p>'; 
+    chatarea.innerHTML += '<p><id>' + data.chatid + '</id>: ' + data.message + '<p>'; 
     // Scrolls the div to the end
     chatarea.scrollTop = chatarea.scrollHeight;
     
