@@ -1,5 +1,5 @@
 // connects to the server on port 9001
-var socket = io.connect('http://localhost:9001');
+var socket = io.connect(location.host);
 
 // Storing the text in dom
 var messagearea = document.getElementById('messagearea');
@@ -22,7 +22,6 @@ window.onload = function(){
         chatid.value = uchatid;
     }
 };
-
 // Listener to listen when a message is being sent
 // It forwards or emits the message to the server
 btn.addEventListener('click',function(){
