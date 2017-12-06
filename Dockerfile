@@ -1,8 +1,8 @@
 FROM node:8
 
-WORKDIR /app
+WORKDIR usr/src/app
 COPY package.json /app
 RUN npm install
-COPY . /app
+COPY . /usr/src/app
 CMD node index.js
-EXPOSE 9002
+EXPOSE 9001
