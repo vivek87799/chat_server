@@ -1,55 +1,69 @@
-// Imports
-// Express is a nodejs framework
 var express = require('express');
-var fs = require('fs')
-var chathistory;
 var socket = require('socket.io');
+var fs = require('fs');
+
+const PORT = 9001;
+
 var app = express();
+var filepath = 'db/chathistory.json';
+var viewpath = 'view';
+var conn = 'connection';
+var chathistory;
 var newmessage = {};
 var messageid = 0;
+var pmessageid = 'messageid';
+var pmessage = 'message';
+var _cmessage = 'cmessage';
+var _chathistory = 'chathistory';
 
-// Reading the chat history from txt file in sync so that it waits for the chat history to get loaded first
-chathistory = JSON.parse(fs.readFileSync('db/chathistory.json'));
-// A call back function to listen and get the message
-var server = app.listen(9001,function(err,data){
+// handles the error if the file does not exist in write
+try{
+    // Reading the chat history from txt file in sync so that it waits for the chat history to get loaded first
+    chathistory = JSON.parse(fs.readFileSync(filepath));
+    messageid = chathistory[chathistory.length - 1].messageid + 1;                
+}catch(err){
     console.log(err);
+    chathistory = [];
+    // creates init message id if the db is empty
+    messageid = 0;   
+}
+// A call back function to listen and get the message
+var server = app.listen(PORT,function(err,data){
+    console.log('listening to port', PORT);
 });
-
-
-//Redirecting the request to the views
-app.use(express.static('view'));
 var io = socket(server);
 
-//listens for connection or calls from client
-io.on('connection',function(socket){
-    socket.on('_cmessage',function(data){
-        try{
-            messageid = chathistory[chathistory.length - 1].messageid + 1;            
-        }catch(err){
-            messageid = 0;
-        }
-        newmessage = {};
-        newmessage["messageid"] = messageid;
-        newmessage["message"] = data;
-        chathistory.push(newmessage);
-        fs.writeFile('db/chathistory.json',JSON.stringify(chathistory, null, 2),finished);
+//Redirecting the request to the views
+app.use(express.static(viewpath));
 
-        function finished(){
-            console.log('message written to file');
+//listens for connection or calls from client
+io.on(conn,function(socket){
+    socket.on(_cmessage,function(data){
+
+        newmessage = {};
+        newmessage[pmessageid] = messageid;
+        newmessage[pmessage] = data;
+        chathistory.push(newmessage);
+
+        // Writing the chat to the file
+        try{
+            fs.writeFileSync(filepath,JSON.stringify(chathistory, null, 2));            
+        }catch(err){
+            console.log('error while writing to chathistory', err);
         }
-        // TODO received message should be stored to a persistant state
-        //Now the received message is sent to all the connected clients or all the open sockets
-        //forwarding response to all the sockets
-        io.sockets.emit('_cmessage',data)
+        
+        // Now the received message is sent to all the connected clients
+        io.sockets.emit(_cmessage,data)
     })
 
+    // Depricated
     // sends the unique chat id for a client
     socket.on('_getchatid',function(id){
         io.sockets.emit('_getchatid',socket.id)
     })
 
     // sending the chat history at init
-    socket.on('_chathistory',function(){
-        io.sockets.emit('_chathistory',chathistory)
+    socket.on(_chathistory,function(){
+        io.sockets.emit(_chathistory,chathistory)
     })
 });
