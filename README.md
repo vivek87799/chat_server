@@ -8,4 +8,4 @@
 
 Docker build and run:
 $docker build -t <your username>/chat-server .
-$docker run -p 9001:9001 -d <your username>/chat-server
+$docker run -p xxxx:9001 -d <your username>/chat-server
