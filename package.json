@@ -1,6 +1,6 @@
 {
   "name": "chat_server",
-  "version": "6.0.0",
+  "version": "6.0.4",
   "description": "a simple chat server",
   "main": "index.js",
   "scripts": {
