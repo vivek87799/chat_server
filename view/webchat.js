@@ -1,5 +1,6 @@
+// connects to the server on port 9001
 var socket = io.connect('http://localhost:9001');
-//Storing the text in dom
+// Storing the text in dom
 var messagearea = document.getElementById('messagearea');
 var chatarea = document.getElementById('chatarea');
 var chatid = document.getElementById('chatid')
@@ -9,7 +10,7 @@ var cid;
 var uchatid;  
 // To get unique id for the chat
 window.onload = function(){
-    socket.emit('chathistory'); 
+    socket.emit('_chathistory'); 
     uchatid = prompt("Enter chat id","anonymous");  
     if(uchatid.trim() == ""){
         chatid.value = "anonymous";                
@@ -31,7 +32,7 @@ btn.addEventListener('click',function(){
         alert('Please type your message');
         return;
     }
-    socket.emit('cmessage',{
+    socket.emit('_cmessage',{
         chatid: chatid.value,//socket.id.slice(-4),        
         message: messagearea.value
 
@@ -40,14 +41,14 @@ btn.addEventListener('click',function(){
 });
 
 //listens to the port to get the generated socket id
-socket.on('getchatid',function(id){
+socket.on('_getchatid',function(id){
     console.log(id);
     cid = id.slice(-4);
     document.getElementById("chatid").value = cid;
 })
 
 //listens to the port to get the generated socket id
-socket.on('chathistory',function(chathistory){
+socket.on('_chathistory',function(chathistory){
     chatarea.innerHTML = "";     
     for (var i = 0; i<chathistory.length;i++){
         chatarea.innerHTML += '<p>' + chathistory[i].message.chatid + ':' + chathistory[i].message.message + '<p>';
@@ -57,9 +58,7 @@ socket.on('chathistory',function(chathistory){
 })
 
 //listens to the port for new message
-socket.on('cmessage',function(data){
-    console.log(data);
-    console.log(socket.id);
+socket.on('_cmessage',function(data){
     messagearea.value = "";
     chatarea.innerHTML += '<p><id>' + data.chatid + '</id>: ' + data.message + '<p>'; 
     // Scrolls the div to the end

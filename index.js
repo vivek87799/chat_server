@@ -12,7 +12,7 @@ var messageid = 0;
 chathistory = JSON.parse(fs.readFileSync('db/chathistory.json'));
 // A call back function to listen and get the message
 var server = app.listen(9001,function(err,data){
-    console.log('listening at 8001');
+    console.log(err);
 });
 
 
@@ -22,7 +22,7 @@ var io = socket(server);
 
 //listens for connection or calls from client
 io.on('connection',function(socket){
-    socket.on('cmessage',function(data){
+    socket.on('_cmessage',function(data){
         try{
             messageid = chathistory[chathistory.length - 1].messageid + 1;            
         }catch(err){
@@ -31,9 +31,7 @@ io.on('connection',function(socket){
         newmessage = {};
         newmessage["messageid"] = messageid;
         newmessage["message"] = data;
-        console.log(chathistory.length);
         chathistory.push(newmessage);
-        console.log(chathistory.length);
         fs.writeFile('db/chathistory.json',JSON.stringify(chathistory, null, 2),finished);
 
         function finished(){
@@ -42,16 +40,16 @@ io.on('connection',function(socket){
         // TODO received message should be stored to a persistant state
         //Now the received message is sent to all the connected clients or all the open sockets
         //forwarding response to all the sockets
-        io.sockets.emit('cmessage',data)
+        io.sockets.emit('_cmessage',data)
     })
 
     // sends the unique chat id for a client
-    socket.on('getchatid',function(id){
-        io.sockets.emit('getchatid',socket.id)
+    socket.on('_getchatid',function(id){
+        io.sockets.emit('_getchatid',socket.id)
     })
 
     // sending the chat history at init
-    socket.on('chathistory',function(){
-        io.sockets.emit('chathistory',chathistory)
+    socket.on('_chathistory',function(){
+        io.sockets.emit('_chathistory',chathistory)
     })
 });

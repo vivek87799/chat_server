@@ -215,5 +215,12 @@
       "chatid": "anonymous",
       "message": "Hello how is my new font"
     }
+  },
+  {
+    "messageid": 31,
+    "message": {
+      "chatid": "anonymous",
+      "message": "new text"
+    }
   }
 ]
