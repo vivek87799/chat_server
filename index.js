@@ -12,7 +12,7 @@ var messageid = 0;
 chathistory = JSON.parse(fs.readFileSync('db/chathistory.json'));
 // A call back function to listen and get the message
 var server = app.listen(9001,function(err,data){
-    console.log('listening at 9001');
+    console.log('listening at 8001');
 });
 
 
